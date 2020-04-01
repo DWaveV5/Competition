@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuang.mapper.StudentMapper">
+    <select id="selectstudentbyid" resultType="Student" parameterType="String">
+        select * from student where studentid=#{id}
+    </select>
+    <insert id="addtakein" useGeneratedKeys="true" keyProperty="groupid" parameterType="Takein" keyColumn="groupid">
+            insert into takein (cname,teacherid,upnumber,projectid) values (#{cname},#{teacherid},#{upnumber},#{projectid})
+    </insert>
+    <insert id="insertStudentIntoTeam" parameterType="Student">
+            insert into teammate (joingroupid,studentid,studentname,studentage,studentsex,studentlevel,studentclass)
+            values (#{joingroupid},#{studentid},#{studentname},#{studentage},#{studentsex},#{studentlevel},#{studentclass})
+    </insert>
+</mapper>

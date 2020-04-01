@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuang.mapper.ProjectMapper">
+        <select id="UserList" resultType="Project">
+            select * from project;
+        </select>
+
+        <select id="SelectById" resultType="Project">
+            select * from project where id=#{id}
+        </select>
+
+        <insert id="addProject" parameterType="Project">
+            insert into project (id,department,projectname,maxlevel,teacherid,phonenumber,groupnumber,peoplenumber,stage,awards,hope,introduce,flow,conditions,state,tdate,whost,lastuseid) values (#{id},#{department},#{projectname},#{maxlevel},#{teacherid},#{phonenumber},#{groupnumber},#{peoplenumber},#{stage},#{awards},#{hope},#{introduce},#{flow},#{conditions},#{state},#{tdate},#{whost},#{lastuseid})
+        </insert>
+
+        <update id="updateProject" parameterType="Project">
+            update project set department=#{department},projectname=#{projectname},maxlevel=#{maxlevel},teacherid=#{teacherid},
+            phonenumber=#{phonenumber},groupnumber=#{groupnumber},peoplenumber=#{peoplenumber},stage=#{stage},awards=#{awards},
+            hope=#{hope},introduce=#{introduce},flow=#{flow},conditions=#{conditions},state=#{state},tdate=#{tdate},whost=#{whost},
+            lastuseid=#{lastuseid},modifyidea=#{modifyidea} where id=#{id}
+        </update>
+
+        <delete id="deleteProject" parameterType="int">
+            delete from project where id=#{id}
+        </delete>
+
+        <select id="academylist" resultType="Project">
+             select * from project where state=2 or state=3 or state=4 or state=5
+        </select>
+
+        <update id="academypass" parameterType="int">
+            update project set state=#{param1} where id=#{param2}
+        </update>
+        
+        <update id="academymodify">
+            update project set modifyidea=#{param1} where id=#{param2}
+        </update>
+
+        <select id="listglk" parameterType="int" resultType="Project">
+            select * from project where state=#{state}
+        </select>
+
+        <update id="glkpass">
+            update project set finallystate=#{param1},getmoney=#{param2},ifpinggu=#{param3} where id=#{param4}
+        </update>
+
+        <update id="glkmodify">
+            update project set finallymodify=#{param1},finallystate=#{param3} where id=#{param2}
+        </update>
+
+        <update id="glkback" parameterType="int">
+            update project set finallystate=3 where id=#{projectid}
+        </update>
+</mapper>
